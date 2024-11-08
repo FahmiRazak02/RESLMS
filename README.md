@@ -8,6 +8,7 @@ A Spring Boot-based CRM system tailored for real estate agents to manage and tra
 - [Installation](#installation)
 - [Usage](#usage)
 - [License](#license)
+- [Screenshot](#screenshot)
 
 ## Features
 
@@ -75,3 +76,5 @@ A Spring Boot-based CRM system tailored for real estate agents to manage and tra
 This project is licensed under the UITM.
 
 ---
+
+## Screenshot
