@@ -69,7 +69,11 @@ A Spring Boot-based CRM system tailored for real estate agents to manage and tra
 
 1. **User Login**: Registered users can log in with credentials provided by the admin.
 2. **Dashboard**: Users can view their lead statistics and check listings from other agents for co-agent opportunities.
-3. **Admin Access**: Admin users can approve new registrations and manage user access.
+3. **Lead Management**: Users can add new leads, view lead details, and edit or delete existing leads in a CRUD table.
+4. **Lead Tracking**: Agents can track leads through stages in the sales pipeline, such as property viewing, property selection, loan approval, and sales.
+5. **Follow-Up Management**: Agents can use the 2x2x2 follow-up technique to track lead interactions, with automatic scheduling of new follow-up dates based on follow-up activity.
+6. **House Listing Management**: Users can add, view, edit, and delete house listings in a CRUD table for property management.
+7. **Admin Access**: Admin users can approve new registrations and manage user access.
 
 ## License
 
@@ -78,3 +82,44 @@ This project is licensed under the UITM.
 ---
 
 ## Screenshot
+
+1. **User Login**:
+
+   ![LOGIN](https://github.com/user-attachments/assets/551fc902-4947-4e03-bc5a-b7653e78cf84)
+   
+2. **Registration**:
+
+   ![REGISTER](https://github.com/user-attachments/assets/c3425057-7b18-4f40-9f67-2bfce4d84aab)
+
+3. **Dashboard**:
+
+   ![dashbaord](https://github.com/user-attachments/assets/d37b9d82-da4c-4fe6-8501-1f8ab19cdf83)zz
+   
+4. **Lead Registration**:
+
+   ![lead-register](https://github.com/user-attachments/assets/9f0301df-0d7c-4425-8ec0-dc5ffcc45dec)
+   
+5. **Lead Management**:
+
+   ![manage lead](https://github.com/user-attachments/assets/3f97e0b3-53be-4669-a5cf-eed78335e52e)
+   
+7. **Lead Tracking**:
+
+   ![lead tracking](https://github.com/user-attachments/assets/ec089d16-416d-47e7-aab5-8d7ebaa2b520)
+
+   
+6. **Follow-Up**:
+
+   ![follow-up](https://github.com/user-attachments/assets/e28a223f-7a19-436c-a798-0d12f8b60595)
+
+7. **Add House Listing**:
+
+   ![submit listing](https://github.com/user-attachments/assets/85be4631-2067-4f79-9385-4a7150794e9a)
+
+10. **House Listing Management**:
+
+   ![manalisting](https://github.com/user-attachments/assets/b3e9baaf-2c87-4fa7-a1cc-98da66e36708)
+
+11. **Admin Access**:
+    
+   ![manage user](https://github.com/user-attachments/assets/dd597847-d0e9-461f-9f09-4949fbb4a892)
