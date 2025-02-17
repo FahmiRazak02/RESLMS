@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/leadRecords")
+    @RequestMapping("/leadRecords")
 public class LeadRecordController {
 
     private LeadRecordService leadRecordService;
@@ -37,36 +37,60 @@ public class LeadRecordController {
     }
 
     @PostMapping("/saveLeadRecord")
-    public String saveLeadRecord(@ModelAttribute("leadRecord") LeadRecord leadRecord, RedirectAttributes redirectAttributes) {
-        // Get the logged-in user
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = ((UserDetails) principal).getUsername();
-        User user = usersService.findUserByUserName(username);
+    public String saveLeadRecord(@ModelAttribute("leadRecord") LeadRecord leadRecord,Model model, RedirectAttributes redirectAttributes) {
+        try {
+            // Get the logged-in user
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            String username = ((UserDetails) principal).getUsername();
+            User user = usersService.findUserByUserName(username);
 
-        // Set the user and save the lead record
-        leadRecord.setUser(user);
-        leadRecordService.save(leadRecord);
+            // Set the user and save the lead record
+            leadRecord.setUser(user);
+            leadRecordService.save(leadRecord);
 
-        // Add flash attribute for success message
-        redirectAttributes.addFlashAttribute("successMessage", "Lead record saved successfully!");
+            // Add flash attribute for success message
+            redirectAttributes.addFlashAttribute("successMessage", "Lead record saved successfully!");
 
-        // Redirect back to the form page
-        return "redirect:/leadRecords/showLeadRecordForm";
+            // Redirect back to the form page
+            return "redirect:/leadRecords/showLeadRecordForm";
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            model.addAttribute("leadRecord", leadRecord);
+
+            model.addAttribute("failedMessage", "Failed to save the Lead Record. Please try again.");
+
+            return "leadRecords/lead-record-form";
+        }
     }
 
     @PostMapping("/updateLeadRecord")
-    public String updateLeadRecord(@ModelAttribute("leadRecord") LeadRecord leadRecord, RedirectAttributes redirectAttributes) {
-        // Get the logged-in user
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = ((UserDetails) principal).getUsername();
-        User user = usersService.findUserByUserName(username);
+    public String updateLeadRecord(@ModelAttribute("leadRecord") LeadRecord leadRecord, Model model, RedirectAttributes redirectAttributes) {
 
-        // Set the user and save the lead record
-        leadRecord.setUser(user);
-        leadRecordService.update(leadRecord);
+        try{
+            // Get the logged-in user
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            String username = ((UserDetails) principal).getUsername();
+            User user = usersService.findUserByUserName(username);
 
-        // Redirect back to the form page
-        return "redirect:/leadRecords/showLeadRecordForm";
+            // Set the user and save the lead record
+            leadRecord.setUser(user);
+            leadRecordService.update(leadRecord);
+
+            redirectAttributes.addFlashAttribute("successMessage", "Successfully updated");
+
+            // Redirect back to the form page
+            return "redirect:/leadRecords/recordList";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            model.addAttribute("leadRecord", leadRecord);
+
+            model.addAttribute("errorMessage", "Update failed");
+
+            return "leadRecords/update-form";
+        }
     }
 
     @GetMapping("/recordList")
@@ -88,5 +112,10 @@ public class LeadRecordController {
     public String deleteLeadRecord(@RequestParam("leadRecordId") long id) {
         leadRecordService.deleteByiD(id);
         return "redirect:/leadRecords/recordList";
+    }
+
+    @GetMapping("/navbar")
+    public String showNavbar(){
+        return "fragments/navbar";
     }
 }

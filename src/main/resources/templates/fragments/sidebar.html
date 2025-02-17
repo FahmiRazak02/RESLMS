@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Listings</title>
+</head>
+<body>
+
+<div th:fragment="sidebar">
+        <!-- Content For Sidebar -->
+        <div class="h-100">
+            <div class="sidebar-logo">
+                <a href="#">AFZRealty</a>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-header">
+                </li>
+                <li class="sidebar-item">
+                    <a href="/" class="sidebar-link">
+                        <i class="fa-solid fa-list pe-2"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed" data-bs-target="#pages" data-bs-toggle="collapse"
+                       aria-expanded="false"><i class="fa-solid fa-file-lines pe-2"></i>
+                        Leads Record
+                    </a>
+                    <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a th:href="@{/leadRecords/showLeadRecordForm}" class="sidebar-link">Regiser New Leads</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a th:href="@{/leadRecords/recordList}" class="sidebar-link">Manage Leads</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a th:href="@{/leadTracking/statusList}" class="sidebar-link">
+                        <i class="fa-solid fa-list pe-2"></i>
+                        Lead Tracking
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a th:href="@{/followup/schedule}" class="sidebar-link">
+                        <i class="fa-solid fa-list pe-2"></i>
+                        Follow-up
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed" data-bs-target="#list" data-bs-toggle="collapse"
+                       aria-expanded="false"><i class="fa-solid fa-file-lines pe-2"></i>
+                        House Listing
+                    </a>
+                    <ul id="list" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a th:href="@{/houseListing/showForm}" class="sidebar-link">Add Listing</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a th:href="@{/houseListing/List}" class="sidebar-link">Manage Listing</a>
+                        </li>
+                    </ul>
+                </li>
+                <div sec:authorize="hasRole('ADMIN')">
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#auth" data-bs-toggle="collapse"
+                           aria-expanded="false"><i class="fa-regular fa-user pe-2"></i>
+                            User Record
+                        </a>
+                        <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a th:href="@{/userAccount/manage}" class="sidebar-link">Manage User Record</a>
+                            </li>
+                        </ul>
+                    </li>
+                </div>
+            </ul>
+        </div>
+</div>
+
+</body>
+</html>

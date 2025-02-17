@@ -37,25 +37,41 @@ public class HouseListingController {
     }
 
     @PostMapping("/saveHouseListing")
-    public String saveHouseListing(@ModelAttribute("houseListings") HouseListing houseListing, RedirectAttributes redirectAttributes) {
-        // Debugging: Print the house listing object
-        System.out.println(houseListing);
+    public String saveHouseListing(@ModelAttribute("houseListings") HouseListing houseListing,
+                                   Model model, RedirectAttributes redirectAttributes) {
+        try {
+            // Debugging: Print the house listing object
+            System.out.println(houseListing);
 
-        // Get the logged-in user
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = ((UserDetails) principal).getUsername();
-        User user = userService.findUserByUserName(username);
+            // Get the logged-in user
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            String username = ((UserDetails) principal).getUsername();
+            User user = userService.findUserByUserName(username);
 
-        // Set the user and save House Listing
-        houseListing.setUser(user);
-        houseListingService.save(houseListing);
+            // Set the user and save House Listing
+            houseListing.setUser(user);
+            houseListingService.save(houseListing);
 
-        // Add flash attribute for success message
-        redirectAttributes.addFlashAttribute("successMessage", "House Listing saved successfully!");
+            // Add flash attribute for success message
+            redirectAttributes.addFlashAttribute("successMessage", "House Listing saved successfully!");
 
-        // Redirect back to the form page
-        return "redirect:/houseListing/showForm";
+            // Redirect to the form after success
+            return "redirect:/houseListing/showForm";
+        } catch (Exception e) {
+            // Log the error for debugging
+            e.printStackTrace();
+
+            // Add the houseListing object back to the model
+            model.addAttribute("houseListings", houseListing);
+
+            // Add the error message
+            model.addAttribute("errorMessage", "Failed to save the House Listing. Please try again.");
+
+            // Return to the form page to retain the input
+            return "houseListing/house-form"; // Adjust this to your actual form template name
+        }
     }
+
 
     @PostMapping("/updateHouseListing")
     public String updateHouseListing(@ModelAttribute("houseListings") HouseListing houseListing, RedirectAttributes redirectAttributes) {
